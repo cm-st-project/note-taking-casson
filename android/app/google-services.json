@@ -8,42 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:615592804601:android:befa89c56afea970262228",
-        "android_client_info": {
-          "package_name": "com.cassonQuin.voiceNotes"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "615592804601-lnetatlilijsd92e7epictuue4gn465r.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAvF50mvpbYwtJKyENdKmI4ZB0P7yw6W2M"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "615592804601-lnetatlilijsd92e7epictuue4gn465r.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "615592804601-qj0kd105p2c7b1d7ofqj99tneeef12n1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.thisIsAProject"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:615592804601:android:458654ab763181b1262228",
         "android_client_info": {
           "package_name": "com.example.this_is_a_project"

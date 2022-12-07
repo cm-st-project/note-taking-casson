@@ -4,53 +4,43 @@ import 'package:this_is_a_project/thisisafile.dart';
 import 'package:this_is_a_project/wahooo.dart';
 import 'database.dart';
 import 'Widgets.dart';
+import'authentication.dart';
 import 'main.dart';
 import 'package:page_transition/page_transition.dart';
+
 class lettheembarassmentcommence extends StatefulWidget {
-  const lettheembarassmentcommence({Key? key, required this.title})
-      : super(key: key);
+  const lettheembarassmentcommence({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
   @override
-  State<lettheembarassmentcommence> createState() =>
-      _lettheembarassmentcommenceState();
+  State<lettheembarassmentcommence> createState() => _lettheembarassmentcommenceState();
 }
 
-class _lettheembarassmentcommenceState
-
-    extends State<lettheembarassmentcommence> {
+class _lettheembarassmentcommenceState extends State<lettheembarassmentcommence> {
   String url="";
   DatabaseHelper db= DatabaseHelper();
   List<taskpage> data = [];
-
+  AuthenticationHelper Auth= AuthenticationHelper();
   List<dynamic> thisisalist = [];
  //listening ofr firebase changes
   _lettheembarassmentcommenceState() {
     refreshNotes();
-    FirebaseDatabase.instance.ref().child("tasks").onChildChanged.listen((event) {
+    FirebaseDatabase.instance.ref().child(Auth.user.uid).onChildChanged.listen((event) {
       print("Data changed!");
       refreshNotes();
     });
-    FirebaseDatabase.instance.ref().child("tasks").onChildRemoved.listen((event) {
+    FirebaseDatabase.instance.ref().child(Auth.user.uid).onChildRemoved.listen((event) {
       refreshNotes();
     });
-    FirebaseDatabase.instance.ref().child("tasks").onChildAdded.listen((event) {
+    FirebaseDatabase.instance.ref().child(Auth.user.uid).onChildAdded.listen((event) {
       refreshNotes();
     });
   }
   //refresh the taskpage array data
   void refreshNotes() {
-  FirebaseDatabase.instance.ref().child('tasks').once().then((event) {
+  FirebaseDatabase.instance.ref().child(Auth.user.uid).once().then((event) {
   List<taskpage> notetmplist = [];
   bool toggledelete = false;
   for (DataSnapshot i in event.snapshot.children){
@@ -71,7 +61,7 @@ class _lettheembarassmentcommenceState
   @override
   void initState() {
     DatabaseReference _db1 = FirebaseDatabase.instance.ref();
-    var ref = _db1.child('tasks');
+    var ref = _db1.child(Auth.user.uid);
     ref.onValue.listen((event) {
       //i = 0;
       int x = event.snapshot.children.length;
@@ -125,29 +115,31 @@ class _lettheembarassmentcommenceState
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false,title: Row(
           children: <Widget>[
-        IconButton(
-        icon: Icon(Icons.arrow_back_ios),
-        onPressed: () {
-          Navigator.push(
-              context,
-              PageTransition(type: PageTransitionType.leftToRight, child: wahooo(thisisalist,"Editing Page", url,)));
-        },
-      ),
+
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyHomePage(title:"recording page")));
+
+              },
+            ),
+        //
+        // IconButton(
+        // icon: Icon(Icons.arrow_back_ios),
+        // onPressed: () {
+        //   Navigator.push(
+        //       context,
+        //       PageTransition(type: PageTransitionType.leftToRight, child: wahooo(thisisalist,"Editing Page", url,)));
+        // },
+      // ),
           Text(widget.title)
           ]),
         actions:[
 
-
-      IconButton(
-        icon: Icon(Icons.arrow_forward_ios),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MyHomePage(title:"recording page")));
-
-        },
-      )]
+        ]
 
       ),
       body: SingleChildScrollView(
