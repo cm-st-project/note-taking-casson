@@ -6,10 +6,13 @@ class SpeechApi {
   static final _speech = SpeechToText();
 
   static Future<bool> toggleRecording({
+
     required Function(String text) onResult,
     required ValueChanged<bool> onListening,
   }) async {
+
     if (_speech.isListening) {
+      print('stop');
       _speech.stop();
       return true;
     }
@@ -19,6 +22,7 @@ class SpeechApi {
       onError: (e) => print('Error: $e'),
     );
 
+    print('===========${isAvailable}====================');
     if (isAvailable) {
       _speech.listen(onResult: (value) => onResult(value.recognizedWords));
     }

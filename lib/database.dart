@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'Widgets.dart';
+import'authentication.dart';
 
 class DatabaseHelper {
   List<taskpage> data = <taskpage>[];
   String title = "unamed Task";
   List<dynamic> myJson = [];
+  AuthenticationHelper authhelper = AuthenticationHelper();
   insertTask(taskpage task) async {
+
     DatabaseReference _db1 = FirebaseDatabase.instance.ref();
-    _db1.child('tasks').child(task.title).set(task.toMap());
+    _db1.child(authhelper.user.uid).child(task.title).set(task.toMap());
   }
 
   void updateData(DataSnapshot i)
@@ -43,20 +46,7 @@ class DatabaseHelper {
       data.clear();
       int t = 0;
       updateData(event.snapshot);
-      /*for (DataSnapshot i in event.snapshot.children) {
-        // title = event.snapshot.children.elementAt(i).value.toString();
-        print(i.children.elementAt(0).value.toString());
 
-        data.insert(t, (taskpage(
-          i.children.elementAt(5).value.toString(),
-          i.children.elementAt(4).value.toString(),
-          i.children.elementAt(3).value.toString(),
-          i.children.elementAt(2).value.toString(),
-          i.children.elementAt(1).value.toString(),
-          i.children.elementAt(0).value.toString(),
-        )));
-        t++;
-      };*/
     });
     return data; //a list of all our taskpage widgets
   }

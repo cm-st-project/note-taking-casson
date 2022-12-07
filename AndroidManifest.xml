@@ -2,10 +2,7 @@
     package="com.example.this_is_a_project">
     <uses-permission android:name="andriod.permission.RECORD_AUDIO"/>
     <uses-permission android:name="andriod.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
+
 
    <application
         android:label="Voice Note Taking"
