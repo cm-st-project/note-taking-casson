@@ -97,9 +97,10 @@ class EditingPageState extends State<EditingPage> {
   @override
   //WHERE ALL THE MAGIC HAPPENS
   Widget build(BuildContext context) {
+    double height = MediaQuery. of(context). size. height;
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.cloud_upload_outlined),
+          child: Icon(Icons.save),
           onPressed: uploadPage,
         ),
         appBar: PreferredSize(
@@ -129,8 +130,7 @@ class EditingPageState extends State<EditingPage> {
                     }),
               ]),
         ),
-        body: Column(
-            children: [
+        body: ListView(children: [
           TextField(
             controller: myController,
           ),
@@ -140,22 +140,22 @@ class EditingPageState extends State<EditingPage> {
             child: QuillToolbar.basic(controller: thisisaquill),
             padding: EdgeInsets.only(top: 30.0),
           ),
-          Expanded(
-              child: Container(
+          Container(
+            height: height*.55 ,
             color: Colors.grey,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:
-                  QuillEditor.basic(controller: thisisaquill, readOnly: false),
+          padding: const EdgeInsets.all(8.0),
+          child: QuillEditor.basic(
+              controller: thisisaquill, readOnly: false),
             ),
-          )),
-
+          ),
 
           Container(
               color: Colors.white,
               height: 120,
               alignment: Alignment.center,
               child: SingleChildScrollView(
+                  physics: ClampingScrollPhysics(),
                   child: Column(children: termList)))
         ]));
   }

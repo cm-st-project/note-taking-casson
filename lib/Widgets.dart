@@ -67,20 +67,23 @@ class taskpage extends StatelessWidget {
     color: const Color(0xffee002c), // Yellow
     height: 120.0,
     alignment: Alignment.center,
-    child: Row(
-        children: [
-          Text(this.title),
-          IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                DatabaseReference _db1 = FirebaseDatabase.instance.ref()
-                    .child(authnumber2.user.uid)
-                    .child(title);
-                    //need to add a UID for the refrence
-                  _db1.remove();
-              }),
-        ]
+    child: Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Row(
+          children: [
+            Text(this.title),
+            IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  DatabaseReference _db1 = FirebaseDatabase.instance.ref()
+                      .child(authnumber2.user.uid)
+                      .child(title);
+                      //need to add a UID for the refrence
+                    _db1.remove();
+                }),
+          ]
 
+      ),
     ),
     )));
 
